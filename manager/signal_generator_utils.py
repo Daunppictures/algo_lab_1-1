@@ -33,14 +33,14 @@ def heapify(list_to_sort, end, root_index, ascending=True):
 
     if left_index < end \
             and (
-            (ascending and list_to_sort[root_index] < list_to_sort[left_index])
-                 or (not ascending and list_to_sort[left_index] < list_to_sort[root_index])):
+            (ascending and list_to_sort[new_root_index] < list_to_sort[left_index])
+                 or (not ascending and list_to_sort[left_index] < list_to_sort[new_root_index])):
         new_root_index = left_index
 
     if right_index < end \
             and (
-            (ascending and list_to_sort[root_index] < list_to_sort[right_index])
-                 or (not ascending and list_to_sort[right_index] < list_to_sort[root_index])):
+            (ascending and list_to_sort[new_root_index] < list_to_sort[right_index])
+                 or (not ascending and list_to_sort[right_index] < list_to_sort[new_root_index])):
         new_root_index = right_index
 
     if new_root_index != root_index:
