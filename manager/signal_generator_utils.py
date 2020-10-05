@@ -1,3 +1,4 @@
+import time
 from typing import List
 from model.signal_generator import SignalGenerator
 
@@ -14,6 +15,7 @@ def sort_by_signal_frequency_asc(signal_generators: List[SignalGenerator]) -> Li
 
 
 def bubble_sort(list_to_sort: list, key=None, ascending: bool = True) -> list:
+    start_time = time.time()
     global swap_count
     global comparison_count
     swap_count = 0
@@ -29,7 +31,8 @@ def bubble_sort(list_to_sort: list, key=None, ascending: bool = True) -> list:
                     or (not ascending and key(list_to_sort[j]) < key(list_to_sort[j+1])):
                 swap_count += 1
                 list_to_sort[j], list_to_sort[j + 1] = list_to_sort[j+1], list_to_sort[j]
-    print(f"[Bubble Sort] Comparisons: {comparison_count}, swaps: {swap_count}")
+    print(f"[Bubble Sort] Comparisons: {comparison_count}, swaps: {swap_count}, "
+          f"execution time: {time.time() - start_time} sec")
     return list_to_sort
 
 
@@ -57,10 +60,11 @@ def heapify(list_to_sort, end, root_index, key, ascending):
     if new_root_index != root_index:
         swap_count += 1
         list_to_sort[new_root_index], list_to_sort[root_index] = list_to_sort[root_index], list_to_sort[new_root_index]
-        heapify(list_to_sort, end, new_root_index, ascending)
+        heapify(list_to_sort, end, new_root_index, key, ascending)
 
 
 def heap_sort(list_to_sort: list, key=None, ascending: bool = True) -> list:
+    start_time = time.time()
     global swap_count
     global comparison_count
     swap_count = 0
@@ -78,5 +82,6 @@ def heap_sort(list_to_sort: list, key=None, ascending: bool = True) -> list:
         list_to_sort[current_index], list_to_sort[0] = list_to_sort[0], list_to_sort[current_index]
         heapify(list_to_sort, current_index, 0, key, ascending)
 
-    print(f"[Heap Sort] Comparisons: {comparison_count}, swaps: {swap_count}")
+    print(f"[Heap Sort] Comparisons: {comparison_count}, swaps: {swap_count}, "
+          f"execution time: {time.time() - start_time} sec")
     return list_to_sort
