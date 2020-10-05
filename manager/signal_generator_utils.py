@@ -11,6 +11,10 @@ def sort_by_signal_frequency_asc(signal_generators: List[SignalGenerator]) -> Li
     pass
 
 
+def swap(first_val, second_val):
+    first_val, second_val = second_val, first_val
+
+
 def bubble_sort(list_to_sort: list, ascending: bool = True) -> list:
     list_length = len(list_to_sort)
     comparison_count = 0
