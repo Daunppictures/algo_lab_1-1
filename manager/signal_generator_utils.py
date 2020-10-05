@@ -7,11 +7,11 @@ comparison_count = 0
 
 
 def sort_by_memory_capacity_desc(signal_generators: List[SignalGenerator]) -> List[SignalGenerator]:
-    pass
+    return bubble_sort(signal_generators, lambda signal_generator: signal_generator.memory_capacity_in_kb, False)
 
 
 def sort_by_signal_frequency_asc(signal_generators: List[SignalGenerator]) -> List[SignalGenerator]:
-    pass
+    return heap_sort(signal_generators, lambda signal_generator: signal_generator.memory_capacity_in_kb)
 
 
 def bubble_sort(list_to_sort: list, key=None, ascending: bool = True) -> list:
