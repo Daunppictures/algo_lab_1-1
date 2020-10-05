@@ -11,7 +11,7 @@ def sort_by_memory_capacity_desc(signal_generators: List[SignalGenerator]) -> Li
 
 
 def sort_by_signal_frequency_asc(signal_generators: List[SignalGenerator]) -> List[SignalGenerator]:
-    return heap_sort(signal_generators, lambda signal_generator: signal_generator.memory_capacity_in_kb)
+    return heap_sort(signal_generators, lambda signal_generator: signal_generator.max_signal_frequency_in_megahz)
 
 
 def bubble_sort(list_to_sort: list, key=None, ascending: bool = True) -> list:
