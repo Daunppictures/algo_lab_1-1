@@ -1,6 +1,8 @@
 from typing import List
-
 from model.signal_generator import SignalGenerator
+
+swap_count = 0
+comparison_count = 0
 
 
 def sort_by_memory_capacity_desc(signal_generators: List[SignalGenerator]) -> List[SignalGenerator]:
@@ -12,9 +14,12 @@ def sort_by_signal_frequency_asc(signal_generators: List[SignalGenerator]) -> Li
 
 
 def bubble_sort(list_to_sort: list, ascending: bool = True) -> list:
-    list_length = len(list_to_sort)
-    comparison_count = 0
+    global swap_count
+    global comparison_count
     swap_count = 0
+    comparison_count = 0
+
+    list_length = len(list_to_sort)
     for i in range(0, list_length - 1):
         for j in range(0, list_length - 1 - i):
             comparison_count += 1
@@ -27,16 +32,21 @@ def bubble_sort(list_to_sort: list, ascending: bool = True) -> list:
 
 
 def heapify(list_to_sort, end, root_index, ascending=True):
+    global swap_count
+    global comparison_count
+
     left_index = root_index * 2 + 1
     right_index = root_index * 2 + 2
     new_root_index = root_index
 
+    comparison_count += 1
     if left_index < end \
             and (
             (ascending and list_to_sort[new_root_index] < list_to_sort[left_index])
                  or (not ascending and list_to_sort[left_index] < list_to_sort[new_root_index])):
         new_root_index = left_index
 
+    comparison_count += 1
     if right_index < end \
             and (
             (ascending and list_to_sort[new_root_index] < list_to_sort[right_index])
@@ -44,14 +54,19 @@ def heapify(list_to_sort, end, root_index, ascending=True):
         new_root_index = right_index
 
     if new_root_index != root_index:
+        swap_count += 1
         list_to_sort[new_root_index], list_to_sort[root_index] = list_to_sort[root_index], list_to_sort[new_root_index]
         heapify(list_to_sort, end, new_root_index, ascending)
 
 
 def heap_sort(list_to_sort: list, ascending: bool = True) -> list:
+    global swap_count
+    global comparison_count
+    swap_count = 0
+    comparison_count = 0
+
     end = len(list_to_sort)
     start_index = end // 2 - 1
-    swap_count = 0
 
     for current_index in range(start_index, -1, -1):
         heapify(list_to_sort, end, current_index, ascending)
@@ -60,4 +75,5 @@ def heap_sort(list_to_sort: list, ascending: bool = True) -> list:
         list_to_sort[current_index], list_to_sort[0] = list_to_sort[0], list_to_sort[current_index]
         heapify(list_to_sort, current_index, 0, ascending)
 
+    print(f"[Heap Sort] Comparisons: {comparison_count}, swaps: {swap_count}")
     return list_to_sort
