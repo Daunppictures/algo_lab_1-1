@@ -11,7 +11,8 @@ def sort_by_signal_frequency_asc(signal_generators: List[SignalGenerator]) -> Li
     pass
 
 
-def swap(first_val, second_val):
+def swap(first_val, second_val, counter):
+    counter += 1
     first_val, second_val = second_val, first_val
 
 
@@ -25,6 +26,6 @@ def bubble_sort(list_to_sort: list, ascending: bool = True) -> list:
             if (ascending and list_to_sort[j] > list_to_sort[j + 1]) \
                     or (not ascending and list_to_sort[j] < list_to_sort[j+1]):
                 swap_count += 1
-                list_to_sort[j], list_to_sort[j+1] = list_to_sort[j+1], list_to_sort[j]
+                swap(list_to_sort[j], list_to_sort[j+1], swap_count)
     print(f"[Bubble Sort] Comparisons: {comparison_count}, swaps: {swap_count}")
     return list_to_sort
